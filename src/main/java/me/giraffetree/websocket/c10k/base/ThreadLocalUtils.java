@@ -16,7 +16,7 @@ import me.giraffetree.websocket.c10k.netty.UnsafeConnectionManager;
  */
 @Slf4j
 public class ThreadLocalUtils {
-
+private static AtomicInteger count = new AtomicInteger();
     public static void removeConnection(String id) {
         if (id == null) {
             log.warn("removeConnection - id is null");
@@ -27,7 +27,8 @@ public class ThreadLocalUtils {
             InternalThreadLocalMap internalThreadLocalMap = thread.threadLocalMap();
             if (internalThreadLocalMap.isIndexedVariableSet(31)) {
                 UnsafeConnectionManager manager = (UnsafeConnectionManager) internalThreadLocalMap.indexedVariable(31);
-                log.info("delete connection - id:{}", id);
+                  int count = ThreadLocalUtils.count.decrementAndGet();
+                log.info("delete count {} connection - id:{}", count, id);
                 manager.deleteConnection(id);
             } else {
                 log.warn("not found threadLocal - thread:{}", thread.getId());
@@ -68,7 +69,8 @@ public class ThreadLocalUtils {
             }
             UnsafeConnectionManager manager = (UnsafeConnectionManager) internalThreadLocalMap.indexedVariable(31);
             manager.addConnection(id, new ChannelConnectionInfo(id, channel));
-            log.info("add connection id:{}", id);
+             int count = ThreadLocalUtils.count.incrementAndGet();
+            log.info("add connection count {} id:{}", count, id);
             return true;
         }
         log.warn("thread not match");
