@@ -57,6 +57,7 @@ public class ThreadLocalUtils {
 
     public static boolean addConnection(String id, Channel channel) {
         Thread cur = Thread.currentThread();
+        log.info("Thread name:{}", cur.getName());
         if (cur instanceof FastThreadLocalThread) {
             FastThreadLocalThread fastThreadLocalThread = (FastThreadLocalThread) cur;
             fastThreadLocalThread.setThreadLocalMap(InternalThreadLocalMap.get());
