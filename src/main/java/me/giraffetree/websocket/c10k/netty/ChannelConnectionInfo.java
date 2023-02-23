@@ -12,7 +12,7 @@ import me.giraffetree.websocket.c10k.base.IExpired;
 @Data
 public class ChannelConnectionInfo implements IExpired {
 
-    private static final long DEFAULT_DELAY_MILLS = 10L * 1000;
+    private static final long DEFAULT_DELAY_MILLS = 60 * 5L * 1000;
 
     private final String id;
 
