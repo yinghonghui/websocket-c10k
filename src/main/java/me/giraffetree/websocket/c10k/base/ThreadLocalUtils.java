@@ -1,5 +1,5 @@
 package me.giraffetree.websocket.c10k.base;
-
+import java.util.concurrent.atomic.AtomicInteger;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.Attribute;
