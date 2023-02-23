@@ -108,12 +108,14 @@ public class ClientStarter {
                 try {
                     x.eval(PING);
                 } catch (IOException e) {
-                    try {
-                        x.close();
-                    } catch (InterruptedException interruptedException) {
+                    System.out.print("111111111");
+                    e.printStackTrace();
+                   //  try {
+                   //      x.close();
+                  //   } catch (InterruptedException interruptedException) {
                         // do nothing
-                        System.exit(0);
-                    }
+                      //   System.exit(0);
+                   //  }
                 }
             });
             long l2 = System.currentTimeMillis();
